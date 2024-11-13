@@ -122,15 +122,27 @@
   <div class="container">
         <nav class="navbar navbar-expand-md navbar-light default">
                 <div class="container-fluid pe-2 hc">
-                    <a class="navbar-brand" href="https://www.anasacademy.uk">
+                    <div class="d-flex justify-content-start align-items-left">
+                    
+                        <a class="navbar-brand" href="https://www.anasacademy.uk">
 
-                        <img src="{{ $logos.'logo-light.png'.'?'.time() }}" alt="logo"  style="width:150px;"/>
-
-                    </a>
-                             <div class="nav-item nva">  
-                                <div class="text-center">
+                            <img src="{{ $logos.'logo-light.png'.'?'.time() }}" alt="logo"  style="width:150px;"/>
+    
+                        </a>
+                        
+                    
+                    </div>
+                    
+                    
+                             <div class="nav-item nva"> 
+                                <form id="logout-form mt-10" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-block mt-2 nbtn">تسجيل الخروج</button>
+                                </form> 
+                                {{-- <div class="text-center">
                                         <a class="btn btn-primary btn-block mt-2 nbtn" id="ticket_button" href="https://www.anasacademy.uk" style="color:#fff">العودة للصفحة الرئيسية</a>
-                                </div>
+                                </div> --}}
+                              
                             </div>
                     <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"-->
                     <!--    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">-->

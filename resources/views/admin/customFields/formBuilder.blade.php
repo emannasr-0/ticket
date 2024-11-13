@@ -35,7 +35,7 @@
             <div class="form-group mb-3 {{ $customField->width }}">
                 <label for="company" class="form-label" style="float:right;margin-right:0px;">{{ __('Company Name') }}</label>
                 <select class="form-select {{ $errors->has('company_id') ? ' is-invalid' : '' }}" id="company_id" name="company_id" required>
-                    <option value="">{{ __('Select Company') }}</option>
+                    <option value="">اختر اسم الشركة</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}" {{ old('company_id') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
                     @endforeach
@@ -51,7 +51,7 @@
             <div class="form-group mb-3">
                 <label for="group_id" class="form-label" style="float:right;margin-right:0px;">اختر الادارة المختصه</label>
                 <select class="form-select" id="group_id" name="group_id">
-                    <option value="">{{ __('Select Group') }}</option>
+                    <option value="">اختر اسم الادارة</option>
                     @foreach ($groups as $group)
                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                     @endforeach
@@ -190,9 +190,9 @@
                         <option value="{{$priority->id}}" @if(old('priority') == $priority->id) selected @endif>{{$priority->name}}</option>
                     @endforeach
                 </select>
-                <small class="sublabel">سيتم مراجعة أهمية طلبك واعتماد أولويته من فريق المساعدة
+                {{-- <small class="sublabel">سيتم مراجعة أهمية طلبك واعتماد أولويته من فريق المساعدة
                 
-                </small>
+                </small> --}}
                 
                 
                 <!--<label class="form-label" style="float:right;margin-right:0px;"></label>-->

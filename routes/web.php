@@ -27,6 +27,7 @@ use App\Http\Controllers\NotificationTemplatesController;
 use App\Http\Controllers\AiTemplateController;
 use App\Http\Controllers\CompanyController;
 use App\Models\Company;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,12 +41,22 @@ use App\Models\Company;
 
 
 require __DIR__.'/auth.php';
-
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('loginhome');
+Route::post('/', [LoginController::class, 'loginhome']);
 
 //Route::resource('companies', CompanyController::class);
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Routes only accessible to users with role_id = 1 (admin)
+    Route::get('/home', [HomeController::class, 'index']);
+});
 
-Route::get('/', [HomeController::class, 'index']);
-
+//Route::get('/home', [HomeController::class, 'index']);
+Route::middleware(['auth', 'role:user'])->group(function () {
+    // Routes only accessible to users with role_id = 2 (user)
+    Route::get('/form', [HomeController::class, 'form']);
+});
+ //Route::get('/form', [HomeController::class, 'form'])->middleware(['auth']);
+ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::get('/get-groups/{companyId}', function ($companyId) {
     $company = Company::find($companyId);
@@ -84,7 +95,7 @@ Route::controller(HomeController::class)->group(function(){
 Route::post('disable-language',[LanguageController::class,'disableLang'])->name('disablelanguage')->middleware(['auth','XSS']);
 
 
-Route::name('admin.')->prefix('admin')->middleware(['auth','XSS'])->group(function() {
+Route::name('admin.')->prefix('admin')->middleware(['auth','XSS','role:admin'])->group(function() {
 
     // Route::get('dashboard', 'DashboardController')->name('dashboard');
     Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');

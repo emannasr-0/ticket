@@ -50,6 +50,7 @@ class AuthenticatedSessionController extends Controller
 
     public function store(LoginRequest $request)
     {
+       
         if (env('RECAPTCHA_MODULE') == 'yes') {
             $validation['g-recaptcha-response'] = 'required|captcha';
         } else {
@@ -86,7 +87,7 @@ class AuthenticatedSessionController extends Controller
 
           $user = \Auth::user();
 
-
+//dd($user,$user->type);
           if ($user->type != 'Admin') {
               $login_detail = LoginDetails::create([
                   'user_id' => $user->id,
@@ -99,7 +100,13 @@ class AuthenticatedSessionController extends Controller
           }
 
 
+      //  return redirect()->intended(RouteServiceProvider::HOME);
+      //dd($user->role_id);
+      if ($user->role_id == 1) { // Check if the user is an admin (assuming role_id 1 is for admin)
         return redirect()->intended(RouteServiceProvider::HOME);
+    } else {
+        return redirect()->intended('/form'); // Redirect non-admin users to the home page or user dashboard
+    }
     }
 
     public function showLoginForm($lang = '')

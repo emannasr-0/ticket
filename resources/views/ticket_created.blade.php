@@ -355,7 +355,10 @@
                                 <button>
                                     <a style="text-decoration:none;color:#fff" href="{{ route('search') }}">متابعة طلب سابق</a>
                                 </button>
+                            
                             </div>
+                          
+                        </div>
                             <div class="justify-content-center btn-section">
                                 <p id="message" class="content-text">
                                     

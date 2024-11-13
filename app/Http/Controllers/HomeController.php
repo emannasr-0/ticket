@@ -43,6 +43,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
     {
         if (!file_exists(storage_path() . "/installed")) {
@@ -51,6 +52,25 @@ class HomeController extends Controller
         if (Auth::user()) {
             return redirect()->route('admin.dashboard');
         }
+
+        $customFields = CustomField::orderBy('order')->get();
+        $categories   = Category::get();
+        $priorities = Priority::get();
+
+        $setting      = Utility::settings();
+        $companies = Company::all();
+        $groups = Group::all();
+
+       
+        return view('home', compact('categories', 'customFields', 'setting', 'priorities','companies','groups'));
+    }
+
+    public function form()
+    {
+        if (!file_exists(storage_path() . "/installed")) {
+            return redirect('install');
+        }
+       
 
         $customFields = CustomField::orderBy('order')->get();
         $categories   = Category::get();
