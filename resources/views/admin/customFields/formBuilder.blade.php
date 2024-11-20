@@ -58,7 +58,7 @@
                 </select>
             </div>
         </div>
-        
+{{--         
         <div class="col-lg-6" id="user-container" style="display:none;">
             <div class="form-group mb-3">
                 <label for="user_id" class="form-label" style="float:right;margin-right:0px;">اختر المستخدم</label>
@@ -66,7 +66,7 @@
                     <option value="">{{ __('Select User') }}</option>
                 </select>
             </div>
-        </div>
+        </div> --}}
             <div class="col-lg-6">
                 <div class="form-group mb-3 {{ $customField->width }}">
                     <label for="name" class="form-label" style="float:right;margin-right:0px;">ادخل اسمك</label>
@@ -271,7 +271,65 @@
         @endif
     @endforeach
 @endif
+
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const companySelect = document.getElementById('company_id');
+      const groupSelect = document.getElementById('group_id');
+      const groupContainer = document.getElementById('group-container');
+  
+      // Initially hide the group container
+      groupContainer.style.display = 'none';
+  
+      // Listen for the company selection change
+      companySelect.addEventListener('change', function () {
+          const companyId = this.value;
+  
+          if (companyId) {
+              // Make an AJAX request to fetch the groups based on selected company
+              fetch('/get-groups/' + companyId)
+                  .then(response => response.json())
+                  .then(data => {
+                      // Clear the group dropdown
+                      groupSelect.innerHTML = '<option value="">اختر الادارة</option>';
+  
+                      // Check if groups are available
+                      if (data.groups.length > 0) {
+                          // Populate the group dropdown with the available groups
+                          data.groups.forEach(function(group) {
+                              const option = document.createElement('option');
+                              option.value = group.id;
+                              option.textContent = group.name;
+                              groupSelect.appendChild(option);
+                          });
+                          // Show the group container if groups are available
+                          groupContainer.style.display = 'block';
+                      } else {
+                          // If no groups are available, hide the group container
+                          groupContainer.style.display = 'none';
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error fetching groups:', error);
+                      groupSelect.innerHTML = '<option value="">{{ __("Error loading groups") }}</option>';
+                      groupContainer.style.display = 'none'; // Hide the group container on error
+                  });
+          } else {
+              // If no company is selected, hide the group container and clear the group dropdown
+              groupContainer.style.display = 'none';
+              groupSelect.innerHTML = '<option value="">{{ __('Select Group') }}</option>';
+          }
+      });
+  
+      // Listen for the group selection change
+      groupSelect.addEventListener('change', function () {
+          const groupId = groupSelect.value;
+  
+          // No user section is being added anymore
+      });
+  });
+  </script>
+{{-- <script>
   document.addEventListener('DOMContentLoaded', function () {
     const companySelect = document.getElementById('company_id');
     const groupSelect = document.getElementById('group_id');
@@ -363,4 +421,4 @@
 });
 
 
-</script>
+</script> --}}

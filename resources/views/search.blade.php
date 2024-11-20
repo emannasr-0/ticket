@@ -469,7 +469,7 @@ body{
                                 
                                 <div class="justify-content-center">
                                     <center>
-                                        <img class="hero-img" src="https://support.anasacademy.uk/resources/views/images/SupportImgs-02.png" alt="slider1"/>
+                                        <img class="hero-img" src="https://support.anasco.uk/resources/views/images/SupportImgs-02.png" alt="slider1"/>
 
                                     </center>
 
@@ -542,7 +542,7 @@ body{
                     </div>
                     <div id="lt-card" class="col-xs-12 col-sm-6 col-md-6 align-items-center justify-content-center ">
                         <div class="auth-img-content">
-                                        <img class="hero-img" src="https://support.anasacademy.uk/resources/views/images/SupportImgs-02.png" alt="slider1"/>
+                                        <img class="hero-img" src="https://support.anasco.uk/resources/views/images/SupportImgs-02.png" alt="slider1"/>
                             <!--<svg width="544" height="504" viewBox="0 0 544 504" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
                             <!--<rect width="544" height="504" fill="url(#pattern0)"/>-->
                             <!--<defs>-->

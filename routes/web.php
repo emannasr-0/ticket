@@ -48,10 +48,7 @@ Route::post('/', [LoginController::class, 'loginhome']);
 
 
 //Route::get('/home', [HomeController::class, 'index']);
-Route::middleware(['auth', 'role:user'])->group(function () {
-    // Routes only accessible to users with role_id = 2 (user)
-    Route::get('/form', [HomeController::class, 'form']);
-});
+
  //Route::get('/form', [HomeController::class, 'form'])->middleware(['auth']);
  Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
@@ -80,9 +77,13 @@ Route::controller(HomeController::class)->group(function(){
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('home', 'index')->name('home');
     });
+    Route::middleware(['auth', 'role:user'])->group(function () {
+        // Routes only accessible to users with role_id = 2 (user)
+        Route::get('/form', [HomeController::class, 'form']);
+        Route::get('search', 'search')->name('search');
+    });
    
     Route::post('home', 'store')->name('home.store');
-    Route::get('search', 'search')->name('search');
     Route::post('search', 'ticketSearch')->name('ticket.search');
     Route::get('tickets/{id}', 'view')->name('home.view');
     Route::post('ticket/{id}', 'reply')->name('home.reply');

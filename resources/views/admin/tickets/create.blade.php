@@ -191,77 +191,62 @@ $setting = App\Models\Utility::settings();
             });
         });
     </script>
-    <script>
-        document.getElementById('company_id').addEventListener('change', function() {
-            var companyId = this.value;
-            if(companyId) {
-                // Make an AJAX request to fetch the groups
-                fetch('/get-groups/' + companyId)
-                    .then(response => response.json())
-                    .then(data => {
-                        var groupDropdown = document.getElementById('group_id');
-                        groupDropdown.innerHTML = '<option value="">{{ __('Select Group') }}</option>'; // Clear current options
-    
-                        if (data.groups.length > 0) {
-                            // Populate the group dropdown
-                            data.groups.forEach(function(group) {
-                                var option = document.createElement('option');
-                                option.value = group.id;
-                                option.textContent = group.name;
-                                groupDropdown.appendChild(option);
-                            });
-                            document.getElementById('group-container').style.display = 'block'; // Show the group dropdown
-                        } else {
-                            document.getElementById('group-container').style.display = 'none'; // Hide if no groups
-                        }
-                    });
-            } else {
-                document.getElementById('group-container').style.display = 'none'; // Hide if no company selected
-            }
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-        const groupSelect = document.getElementById('group_id');
-        const userSelect = document.getElementById('user_id');
-        const userContainer = document.getElementById('user-container');
-    
-        groupSelect.addEventListener('change', function () {
-            const groupId = groupSelect.value;
-    
-            if (groupId) {
-                // Show the user dropdown container
-                userContainer.style.display = 'block';
-    
-                // Make an AJAX request to fetch users based on the selected group
-                fetch(`/group/${groupId}/users`)
-                    .then(response => response.json())
-                    .then(users => {
-                        // Clear existing options
-                        userSelect.innerHTML = '<option value="">{{ __("Select User") }}</option>';
-    
-                        // If users are returned, populate the dropdown
-                        if (users.length > 0) {
-                            users.forEach(user => {
-                                const option = document.createElement('option');
-                                option.value = user.id;
-                                option.textContent = user.name;
-                                userSelect.appendChild(option);
-                            });
-                        } else {
-                            // Handle case where no users are found
-                            userSelect.innerHTML = '<option value="">{{ __("No users available") }}</option>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching users:', error);
-                        userSelect.innerHTML = '<option value="">{{ __("Error loading users") }}</option>';
-                    });
-            } else {
-                // Hide the user dropdown container if no group is selected
-                userContainer.style.display = 'none';
-            }
-        });
-    });
-    
-    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const companySelect = document.getElementById('company_id');
+      const groupSelect = document.getElementById('group_id');
+      const groupContainer = document.getElementById('group-container');
+  
+      // Initially hide the group container
+      groupContainer.style.display = 'none';
+  
+      // Listen for the company selection change
+      companySelect.addEventListener('change', function () {
+          const companyId = this.value;
+  
+          if (companyId) {
+              // Make an AJAX request to fetch the groups based on selected company
+              fetch('/get-groups/' + companyId)
+                  .then(response => response.json())
+                  .then(data => {
+                      // Clear the group dropdown
+                      groupSelect.innerHTML = '<option value="">اختر الادارة</option>';
+  
+                      // Check if groups are available
+                      if (data.groups.length > 0) {
+                          // Populate the group dropdown with the available groups
+                          data.groups.forEach(function(group) {
+                              const option = document.createElement('option');
+                              option.value = group.id;
+                              option.textContent = group.name;
+                              groupSelect.appendChild(option);
+                          });
+                          // Show the group container if groups are available
+                          groupContainer.style.display = 'block';
+                      } else {
+                          // If no groups are available, hide the group container
+                          groupContainer.style.display = 'none';
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Error fetching groups:', error);
+                      groupSelect.innerHTML = '<option value="">{{ __("Error loading groups") }}</option>';
+                      groupContainer.style.display = 'none'; // Hide the group container on error
+                  });
+          } else {
+              // If no company is selected, hide the group container and clear the group dropdown
+              groupContainer.style.display = 'none';
+              groupSelect.innerHTML = '<option value="">{{ __('Select Group') }}</option>';
+          }
+      });
+  
+      // Listen for the group selection change
+      groupSelect.addEventListener('change', function () {
+          const groupId = groupSelect.value;
+  
+          // No user section is being added anymore
+      });
+  });
+  </script>
 @endpush
 
