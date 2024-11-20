@@ -165,7 +165,7 @@ class HomeController extends Controller
             'priority' => 'required|string|max:255',
             'company_id' => 'required|exists:companies,id',
             'group_id' => 'required|exists:groups,id',
-            'user_id' => 'required|exists:users,id',
+          //  'user_id' => 'required|exists:users,id',
         ];
        
         if (env('RECAPTCHA_MODULE') == 'yes') {
