@@ -84,7 +84,7 @@ $setting = App\Models\Utility::settings();
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            {{-- <div class="form-group col-md-6">
                                 <label class="require form-label">{{ __('Category') }}</label>
                                 <select class="form-control {{(!empty($errors->first('category')) ? 'is-invalid' : '')}}" name="category" required="">
                                     <option value="">{{ __('Select Category') }}</option>
@@ -95,7 +95,7 @@ $setting = App\Models\Utility::settings();
                                 <div class="invalid-feedback">
                                     {{ $errors->first('category') }}
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-md-6">
                                 <label class="require form-label">{{ __('Status') }}</label>
                                 <select class="form-control {{(!empty($errors->first('status')) ? 'is-invalid' : '')}}" name="status" required="">

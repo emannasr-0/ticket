@@ -479,7 +479,7 @@ body{
                             <div class="">
                                 <!--<h2 class="mb-3 f-w-600">{{ __('Search Your Ticket') }}</h2>-->
                                  <div class="mb-3" style="text-align:center;">
-                                        <h2 class="hero-text f-w-600" style="color:#5E0A83;">البحث عن تذكرة طلبك</h2>
+                                        <h2 class="hero-text f-w-600" style="color:#008ECC;">البحث عن تذكرة طلبك</h2>
                                         <p class="p-text">
                                             
 يمكنك متابعة طلبك <br> عن طريق رقم التذكرة المرسل لبريدك الالكتروني عند طلب الخدمة
@@ -525,7 +525,7 @@ body{
                                         <button class="btn btn-primary btn-submit btn-block mt-2">{{ __('Search') }}</button>
                                     </div>
                                     <div class="d-grid">
-                                        <button class="btn btn-primary btn-submit btn-block mt-2 btn-style" style="background-color:#F70387;color:#fff;border:none;" onclick="returnToTicketPage()">لإنشاء طلب جديد</button>
+                                        <button class="btn btn-primary btn-submit btn-block mt-2 btn-style" style="background-color:#008ECC;color:#fff;border:none;" onclick="returnToTicketPage()">لإنشاء طلب جديد</button>
                                     </div>
         
 
@@ -567,7 +567,7 @@ body{
     </div>
     <script>
         function returnToTicketPage() {
-            window.location.href = "https://support.anasacademy.uk/";
+            window.location.href = "https://support.anasco.uk/form";
         }
         
        

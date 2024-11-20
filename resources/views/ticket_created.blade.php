@@ -351,7 +351,7 @@
                             
                             <div class="justify-content-center btn-section">
                           
-                                <button class="btn-style" onclick="returnToTicketPage()">العودة للصفحة الرئيسية</button>
+                                {{-- <button class="btn-style" onclick="returnToTicketPage()">العودة للصفحة الرئيسية</button> --}}
                                 <button>
                                     <a style="text-decoration:none;color:#fff" href="{{ route('search') }}">متابعة طلب سابق</a>
                                 </button>

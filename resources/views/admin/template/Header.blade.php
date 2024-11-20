@@ -23,17 +23,17 @@
     flex-direction: row-reverse !important;
 }
    .nbtn {
-        background: #5E0A83 !important;
+        background: #008ECC !important;
     }
     .hbtn{
         background: #fff !important;
-        color: #5E0A83 !important;
-        border:2px solid #5E0A83;
+        color: #008ECC !important;
+        border:2px solid #008ECC;
     }
     .hbtn:hover{
-        background: #5E0A83 !important;
+        background: #008ECC !important;
         color:#fff !important;
-        border:2px solid #5E0A83;
+        border:2px solid #008ECC;
     }
    .form-control, .custom-select, .dataTable-selector, .dataTable-input,# {
    
@@ -139,11 +139,13 @@
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-block mt-2 nbtn">تسجيل الخروج</button>
                                 </form> 
-                                {{-- <div class="text-center">
-                                        <a class="btn btn-primary btn-block mt-2 nbtn" id="ticket_button" href="https://www.anasacademy.uk" style="color:#fff">العودة للصفحة الرئيسية</a>
-                                </div> --}}
+                             
                               
                             </div>
+
+                               {{-- <div class="text-center">
+                                        <a class="btn btn-primary btn-block mt-2 nbtn" id="ticket_button" href="https://www.anasacademy.uk" style="color:#fff">العودة للصفحة الرئيسية</a>
+                                </div> --}}
                     <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"-->
                     <!--    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">-->
                     <!--    <span class="navbar-toggler-icon"></span>-->

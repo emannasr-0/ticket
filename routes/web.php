@@ -45,10 +45,7 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('loginhome');
 Route::post('/', [LoginController::class, 'loginhome']);
 
 //Route::resource('companies', CompanyController::class);
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    // Routes only accessible to users with role_id = 1 (admin)
-    Route::get('/home', [HomeController::class, 'index']);
-});
+
 
 //Route::get('/home', [HomeController::class, 'index']);
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -80,8 +77,10 @@ Route::post('/mailgun/webhook', [IncomingEmailController::class,'handleWebhook']
 // Route::post('/mailgun/webhook/store', [IncomingEmailController::class,'store']);
 
 Route::controller(HomeController::class)->group(function(){
-
-    Route::get('home', 'index')->name('home');
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('home', 'index')->name('home');
+    });
+   
     Route::post('home', 'store')->name('home.store');
     Route::get('search', 'search')->name('search');
     Route::post('search', 'ticketSearch')->name('ticket.search');

@@ -951,7 +951,7 @@
     <script src="{{ asset('js/editorplaceholder.js') }}"></script>
     <script>
           function returnToTicketSearch() {
-            window.location.href = "https://support.anasacademy.uk/search";
+            window.location.href = "https://support.anasco.uk/search";
         }
     </script>
     <script>

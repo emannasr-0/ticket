@@ -42,13 +42,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('search') }}">{{ __('Search Ticket') }}</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <select name="language" id="language" class="btn btn-primary my-1 me-2 language_option_bg" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                                     @foreach(App\Models\Utility::languages() as $code  => $language)
                                     <option @if($code == $lang) selected @endif value="{{ route('login',$code) }}">{{Str::ucfirst($language)}}</option>
                                     @endforeach
                                 </select>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                                     </div>
                                 @endif
                                 <div class="form-group mb-3">
-                                    <label for="email" class="form-label d-flex">{{ __('Email') }}</label>
+                                    <label for="email" class="form-label d-flex">الايميل</label>
                                     <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email" name="email" placeholder="{{ __('Email address') }}" required="">
                                     <div class="invalid-feedback d-block">{{ $errors->first('email') }}</div>
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label class="form-label d-flex" >{{ __('Password') }}</label>
+                                    <label class="form-label d-flex" >كلمة المرور</label>
                                     <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" name="password" placeholder="{{ __('Enter Password') }}" required="">
                                     <div class="invalid-feedback d-block">{{ $errors->first('password') }}</div>
                                 </div>
@@ -95,14 +95,14 @@
                                 @endif
 
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-block mt-2" id="login_button">{{ __('Login') }}</button>
+                                    <button type="submit" class="btn btn-primary btn-block mt-2" id="login_button">تسجيل الدخول</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="col-xl-6 img-card-side">
                         <div class="auth-img-content">
-                            <img src="{{ asset('assets/images/auth/img-auth-3.svg') }}" alt="" class="img-fluid">
+                            {{-- <img src="{{ asset('assets/images/auth/img-auth-3.svg') }}" alt="" class="img-fluid"> --}}
                             <h3 class="text-white mb-4 mt-5">{{ __('“Attention is the new currency”')}}</h3>
                             <p class="text-white">{{ __('The more effortless the writing looks, the more effort the writer actually put into the process.')}}</p>
                         </div>

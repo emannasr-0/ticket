@@ -69,7 +69,7 @@
         </div>
             <div class="col-lg-6">
                 <div class="form-group mb-3 {{ $customField->width }}">
-                    <label for="name" class="form-label" style="float:right;margin-right:0px;">{{ __($customField->name) }}</label>
+                    <label for="name" class="form-label" style="float:right;margin-right:0px;">ادخل اسمك</label>
                     <div class="form-icon-user">
                         <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" placeholder="{{ __($customField->placeholder) }}" required="" value="{{old('name')}}">
                         <div class="invalid-feedback d-block">
@@ -81,7 +81,7 @@
         @elseif($customField->id == '2')
         <div class="col-lg-6">
             <div class="form-group mb-3 {{ $customField->width }}">
-                <label for="email" class="form-label" style="float:right;margin-right:0px;">{{ __($customField->name) }}</label>
+                <label for="email" class="form-label" style="float:right;margin-right:0px;">ادخل بريدك الالكترونيي</label>
                 <div class="form-icon-user">
                     <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" name="email" placeholder="{{ __($customField->placeholder) }}" required="" value="{{old('email')}}">
                     <div class="invalid-feedback d-block">
@@ -110,7 +110,7 @@
         @elseif($customField->id == '4')
         <div class="col-lg-6">
             <div class="form-group mb-3 {{ $customField->width }}">
-                <label for="subject" class="form-label" style="float:right;margin-right:0px;">{{ __($customField->name) }}</label>
+                <label for="subject" class="form-label" style="float:right;margin-right:0px;">ادخل موضوع التذكرة</label>
                 <div class="form-icon-user">
                     <input type="text" class="form-control {{ $errors->has('subject') ? ' is-invalid' : '' }}" id="subject" name="subject" placeholder="{{ __($customField->placeholder) }}" required="" value="{{old('subject')}}">
                     <div class="invalid-feedback d-block">
@@ -150,7 +150,7 @@
         @elseif($customField->id == '5')
         <div class="col-lg-12">
             <div class="form-group mb-3 {{ $customField->width }}" style="text-align:right;">
-                <label for="description" class="form-label" style="margin-right:0px;text-align: right;">{{ __('Description') }}</label>
+                <label for="description" class="form-label" style="margin-right:0px;text-align: right;">ادخل وصف التذكرة</label>
                 <textarea name="description" class="form-control textareaField{{ $errors->has('description') ? ' is-invalid' : '' }}"  placeholder="{{ __($customField->placeholder) }}">{{old('description')}}</textarea>
                 <div class="invalid-feedback">
                     {{ $errors->first('description') }}
@@ -272,38 +272,58 @@
     @endforeach
 @endif
 <script>
-    document.getElementById('company_id').addEventListener('change', function() {
-        var companyId = this.value;
-        if(companyId) {
-            // Make an AJAX request to fetch the groups
-            fetch('/get-groups/' + companyId)
-                .then(response => response.json())
-                .then(data => {
-                    var groupDropdown = document.getElementById('group_id');
-                    groupDropdown.innerHTML = '<option value="">{{ __('Select Group') }}</option>'; // Clear current options
-
-                    if (data.groups.length > 0) {
-                        // Populate the group dropdown
-                        data.groups.forEach(function(group) {
-                            var option = document.createElement('option');
-                            option.value = group.id;
-                            option.textContent = group.name;
-                            groupDropdown.appendChild(option);
-                        });
-                        document.getElementById('group-container').style.display = 'block'; // Show the group dropdown
-                    } else {
-                        document.getElementById('group-container').style.display = 'none'; // Hide if no groups
-                    }
-                });
-        } else {
-            document.getElementById('group-container').style.display = 'none'; // Hide if no company selected
-        }
-    });
-    document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    const companySelect = document.getElementById('company_id');
     const groupSelect = document.getElementById('group_id');
+    const groupContainer = document.getElementById('group-container');
     const userSelect = document.getElementById('user_id');
     const userContainer = document.getElementById('user-container');
 
+    // Initially hide the group container and user container
+    groupContainer.style.display = 'none';
+    userContainer.style.display = 'none';
+
+    // Listen for the company selection change
+    companySelect.addEventListener('change', function () {
+        const companyId = this.value;
+
+        if (companyId) {
+            // Make an AJAX request to fetch the groups based on selected company
+            fetch('/get-groups/' + companyId)
+                .then(response => response.json())
+                .then(data => {
+                    // Clear the group dropdown
+                    groupSelect.innerHTML = '<option value="">{{ __('Select Group') }}</option>';
+
+                    // Check if groups are available
+                    if (data.groups.length > 0) {
+                        // Populate the group dropdown with the available groups
+                        data.groups.forEach(function(group) {
+                            const option = document.createElement('option');
+                            option.value = group.id;
+                            option.textContent = group.name;
+                            groupSelect.appendChild(option);
+                        });
+                        // Show the group container if groups are available
+                        groupContainer.style.display = 'block';
+                    } else {
+                        // If no groups are available, hide the group container
+                        groupContainer.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching groups:', error);
+                    groupSelect.innerHTML = '<option value="">{{ __("Error loading groups") }}</option>';
+                    groupContainer.style.display = 'none'; // Hide the group container on error
+                });
+        } else {
+            // If no company is selected, hide the group container and clear the group dropdown
+            groupContainer.style.display = 'none';
+            groupSelect.innerHTML = '<option value="">{{ __('Select Group') }}</option>';
+        }
+    });
+
+    // Listen for the group selection change to load the users
     groupSelect.addEventListener('change', function () {
         const groupId = groupSelect.value;
 
@@ -341,5 +361,6 @@
         }
     });
 });
+
 
 </script>
