@@ -323,15 +323,15 @@ class TicketController extends Controller
 
                // Send email to the group if it has an email
                $group = Group::find($request->group_id);
-               $user = User::find($request->user_id);  
+            //    $user = User::find($request->user_id);  
          if ($group && $group->email) {
                 Utility::sendEmailTemplate('new_ticket', [$group->email], $uArr);
             }
     
             // Send email to the user
-            if ($user && $user->email) {
-                Utility::sendEmailTemplate('new_ticket', [$user->email], $uArr);
-            }
+            // if ($user && $user->email) {
+            //     Utility::sendEmailTemplate('new_ticket', [$user->email], $uArr);
+            // }
             Utility::sendEmailTemplate('new_ticket', [$request->email], $uArr);
 
 

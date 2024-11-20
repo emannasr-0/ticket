@@ -244,7 +244,7 @@ class HomeController extends Controller
 
 
             $group = Group::find($request->group_id);
-            $user = User::find($request->user_id);  // Get the user associated with the ticket
+            // $user = User::find($request->user_id);  // Get the user associated with the ticket
     
             // Send email to the group if it has an email
             if ($group && $group->email) {
@@ -252,9 +252,9 @@ class HomeController extends Controller
             }
     
             // Send email to the user
-            if ($user && $user->email) {
-                Utility::sendEmailTemplate('new_ticket', [$user->email], $uArr);
-            }
+            // if ($user && $user->email) {
+            //     Utility::sendEmailTemplate('new_ticket', [$user->email], $uArr);
+            // }
             Utility::sendEmailTemplate('new_ticket', [$request->email], $uArr);
         } catch (\Exception $e) {
             $error_msg = __('E-Mail has been not sent due to SMTP configuration');
